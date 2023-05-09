@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { useFonts } from "expo-font";
 import SignIn from "./screens/SignIn";
-import Door from "./screens/Door";
+import DoorController from "./mvcTrial/Model";
 import Home from "./screens/Home";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -17,12 +17,12 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName={"SignIn"}
+                initialRouteName={"door"}
                 screenOptions={{ headerShown: false }}
             >
                 <Stack.Screen name="SignIn" component={SignIn} />
                 <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="door" component={Door} />
+                <Stack.Screen name="door" component={DoorController} />
             </Stack.Navigator>
         </NavigationContainer>
     );

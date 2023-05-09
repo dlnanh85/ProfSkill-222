@@ -2,7 +2,7 @@ export const post = (feed, val) => {
     return fetch(`https://io.adafruit.com/api/v2/dlnanh85/feeds/${feed}/data`, {
         method: "POST",
         headers: {
-            "X-AIO-Key": "aio_XaQb46Q7vxr3vP8Cn4mccSPVdSwr",
+            "X-AIO-Key": "aio_BjpJ46KwbyzyeWTRNJlcOKI48wEg",
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -14,7 +14,7 @@ export const post = (feed, val) => {
 export const get = async (feed , limit=0) => {
     const response = await fetch(`https://io.adafruit.com/api/v2/dlnanh85/feeds/${feed}/data`, {
         headers: {
-            "X-AIO-Key": "aio_XaQb46Q7vxr3vP8Cn4mccSPVdSwr",
+            "X-AIO-Key": "aio_BjpJ46KwbyzyeWTRNJlcOKI48wEg",
         },
     });
     const data = await response.json();
