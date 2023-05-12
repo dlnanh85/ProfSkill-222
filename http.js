@@ -1,8 +1,8 @@
 export const post = (feed, val) => {
-    return fetch(`https://io.adafruit.com/api/v2/dlnanh85/feeds/${feed}/data`, {
+    return fetch(`https://io.adafruit.com/api/v2/chenfa666/feeds/${feed}/data`, {
         method: "POST",
         headers: {
-            "X-AIO-Key": "aio_BjpJ46KwbyzyeWTRNJlcOKI48wEg",
+            "X-AIO-Key": "aio_Gvqr92FWEULXca418ZyO5usBlHby",
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -12,9 +12,13 @@ export const post = (feed, val) => {
 };
 
 export const get = async (feed , limit=0) => {
-    const response = await fetch(`https://io.adafruit.com/api/v2/dlnanh85/feeds/${feed}/data`, {
+    let api = `https://io.adafruit.com/api/v2/chenfa666/feeds/${feed}/data`;
+    if (limit) {
+        api += `?limit=${limit}`
+    }
+    const response = await fetch(api, {
         headers: {
-            "X-AIO-Key": "aio_BjpJ46KwbyzyeWTRNJlcOKI48wEg",
+            "X-AIO-Key": "aio_Gvqr92FWEULXca418ZyO5usBlHby",
         },
     });
     const data = await response.json();

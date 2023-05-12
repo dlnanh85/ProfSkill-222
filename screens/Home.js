@@ -17,10 +17,23 @@ import { Border, FontFamily, FontSize, Color } from "../GlobalStyles";
 import LogItem from "../components/LogItem";
 import { useNavigation } from "@react-navigation/native";
 import System from "../components/System";
-import { signOut } from "firebase/auth";
+import { signOut, updateProfile } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 
+
+
+
+
+
 const Home = () => {
+    let user = auth.currentUser;
+    if (user) {
+        console.log('success')
+    }
+    updateProfile(auth.currentUser, {
+        displayName: "User Name"
+      })
+
     const navigation = useNavigation();
     const buttonColor = ['#009EFF', '#16A085', '#E74C3C', '#F39C12'];
     const buttonColorFaded = ['#008DEE', '#059074', '#D63B2B', '#D28B01'];
@@ -47,7 +60,7 @@ const Home = () => {
                     <View style={styles.userInfo}>
                         <View style={styles.greeting}>
                             <Text style={styles.greetingName}>
-                                {"Hello Mr. John"}
+                                {`Hello ${user.displayName}`}
                             </Text>
                             <Text style={styles.greetingSub}>
                                 {"Welcome home!"}
@@ -82,6 +95,7 @@ const Home = () => {
                     </View>
                     <View style={styles.system}>
                         <Pressable
+                            onPress={() => {navigation.navigate('Light')}}
                             style={({ pressed }) => [
                                 styles.button,
                                 {
@@ -96,6 +110,7 @@ const Home = () => {
                             </Text>
                         </Pressable>
                         <Pressable
+                            onPress = {() => navigation.navigate('Tv')}
                             style={({ pressed }) => [
                                 styles.button,
                                 {
@@ -124,7 +139,7 @@ const Home = () => {
                             </Text>
                         </Pressable>
                         <Pressable
-                            onPress={() => navigation.navigate('door')}
+                            onPress={() => navigation.navigate('Door')}
                             style={({ pressed }) => [
                                 styles.button,
                                 {

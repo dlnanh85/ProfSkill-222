@@ -3,22 +3,21 @@ import {
     Image,
     StyleSheet,
     Text,
-    TextInput,
     View,
     Pressable,
     ScrollView,
-    Fragment,
     SafeAreaView,
-    KeyboardAvoidingView,
-    Switch,
-    Button,
 } from "react-native";
-import { Border, FontFamily, FontSize, Color } from "../GlobalStyles";
-import LogItem from "../components/LogItem";
+import { Border, FontFamily, FontSize, Color } from "../../GlobalStyles";
+import LogItem from "../../components/LogItem";
 import { useNavigation } from "@react-navigation/native";
-import { get, post } from "../http";
 
-const Door = (props) => {
+
+const DoorView = (props) => {
+
+    const renderStatus = props.model.statuses.map((stat, key) => (
+        <LogItem key={key} time={stat.time} isLocked={stat.isLocked} />
+    ));
 
     return (
         <View style={{ backgroundColor: Color.wheat }}>
@@ -26,12 +25,12 @@ const Door = (props) => {
                 <View style={styles.heading}>
                     <Pressable
                         style={styles.backButton}
-                        onPress={props.handleNavigate}
+                        onPress={() => props.onNavigate()}
                     >
                         <Image
                             style={(width = "100%")}
                             resizeMode="cover"
-                            source={require("../assets/back-button.png")}
+                            source={require("../../assets/back-button.png")}
                         />
                     </Pressable>
                     <Text style={styles.title}>{`Door Control`}</Text>
@@ -42,17 +41,17 @@ const Door = (props) => {
                             style={[
                                 styles.lock,
                                 {
-                                    backgroundColor: props.doorLocked
+                                    backgroundColor: props.model.doorLocked
                                         ? Color.orangered
                                         : "green",
                                 },
                             ]}
                             onPress={() => {
-                                props.handleDoorLock();
+                                props.onDoorLockPress();
                             }}
                         >
                             <Text style={styles.lockText}>
-                                {props.doorLocked ? `LOCKED` : `UNLOCKED`}
+                                {props.model.doorLocked ? `LOCKED` : `UNLOCKED`}
                             </Text>
                         </Pressable>
                     </View>
@@ -62,7 +61,7 @@ const Door = (props) => {
                             styleContentContainer={{ alignItems: "center" }}
                             style={styles.logContent}
                         >
-                            {props.statuses}
+                            {renderStatus}
                         </ScrollView>
                     </View>
                 </View>
@@ -164,4 +163,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Door;
+export default DoorView;
